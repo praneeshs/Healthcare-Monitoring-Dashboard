@@ -1,0 +1,51 @@
+PatientID,PatientName,Gender,Age,AdmissionDate,AdmissionTime,DischargeDate,Department,Ward,BedNumber,DoctorAssigned,DoctorRating,TreatmentStatus,TreatmentDays,ICUFlag,EmergencyFlag,HeartRate,SystolicBP,DiastolicBP,SpO2,Temperature,Insurance
+P1179,William Martinez,Female,69,2024-09-06,19:46,2024-09-14,Neurology,Ward D,Ward D-43,Dr. Davis,4.6,Discharged,8,0,0,75,113,74,96,97.8,Private
+P0866,Daniel Gonzales,Male,48,2024-06-14,13:50,,Surgery,Ward C,Ward C-10,Dr. Garcia,3.6,Critical,409,1,0,100,140,92,95,103.6,Medicaid
+P0102,Joseph Ramirez,Male,43,2024-02-28,08:36,,Pediatrics,Emergency,Emergency-40,Dr. Anderson,4.8,Recovering,516,0,0,77,123,82,95,97.7,Corporate
+P0440,Joseph Jones,Female,61,2024-02-14,23:24,2024-02-15,ICU,Ward C,Ward C-41,Dr. Anderson,4.8,Discharged,1,1,0,69,128,86,95,96.5,Medicare
+P0059,Patricia Moore,Female,18,2024-02-22,00:36,,Cardiology,Pediatric,Pediatric-17,Dr. Smith,5.0,Recovering,522,0,1,80,103,84,99,98.4,Uninsured
+P1121,Robert Perez,Female,86,2024-10-18,08:57,2024-11-08,Surgery,ICU,ICU-49,Dr. Lopez,4.5,Discharged,21,0,0,63,114,60,100,97.8,Medicare
+P0324,Joseph Moore,Female,61,2024-02-10,14:28,2024-02-22,ICU,Ward D,Ward D-32,Dr. Anderson,3.6,Discharged,12,1,0,95,142,110,89,99.9,Uninsured
+P0975,Jennifer Williams,Male,24,2024-01-11,00:47,2024-01-27,Oncology,Surgery Wing,Surgery Wing-38,Dr. Lopez,4.1,Discharged,16,0,1,81,126,88,98,98.8,Uninsured
+P0412,Patricia Lopez,Male,50,2024-03-05,15:14,2024-03-06,Oncology,Ward B,Ward B-29,Dr. Garcia,4.5,Discharged,1,0,0,60,109,72,99,99.3,Medicare
+P0856,Jennifer Jackson,Female,43,2024-08-20,20:40,2024-09-05,Emergency,Ward C,Ward C-15,Dr. Hernandez,3.6,Discharged,16,0,1,81,110,88,95,98.0,Medicaid
+P0821,Anthony Jones,Male,61,2024-09-27,22:19,2024-10-01,General Medicine,Ward C,Ward C-45,Dr. Hernandez,3.8,Discharged,4,0,0,81,105,97,99,97.9,Private
+P0045,Kenneth Lewis,Male,28,2024-05-19,13:31,,General Medicine,Ward D,Ward D-11,Dr. Lopez,4.9,Stable,435,0,0,74,113,82,99,99.3,Uninsured
+P0050,Mary Robinson,Female,64,2024-07-22,22:12,,Maternity,Surgery Wing,Surgery Wing-44,Dr. Anderson,4.3,Critical,371,1,0,64,118,50,91,98.1,Corporate
+P0850,John Perez,Female,41,2024-04-24,14:35,2024-05-15,ICU,Ward D,Ward D-8,Dr. Davis,4.1,Discharged,21,1,1,104,129,96,100,97.0,Medicaid
+P0241,Kenneth White,Female,71,2024-04-15,16:38,2024-04-17,Emergency,ICU,ICU-42,Dr. Jones,3.2,Discharged,2,0,1,88,117,72,100,97.7,Private
+P0171,Barbara Martin,Female,40,2024-02-14,12:42,,ICU,Emergency,Emergency-16,Dr. Thomas,4.4,Critical,530,1,0,122,118,73,92,98.1,Private
+P0524,Sharon Thomas,Male,77,2024-04-20,19:29,,ICU,Ward C,Ward C-13,Dr. Lopez,4.0,Stable,464,1,1,73,132,74,85,98.6,Medicaid
+P0766,Jessica Martinez,Male,60,2024-12-03,17:28,,Oncology,ICU,ICU-39,Dr. Garcia,2.9,Recovering,237,0,0,76,111,89,98,99.1,Corporate
+P0839,Paul Jones,Female,25,2024-06-12,18:02,2024-06-13,Cardiology,Ward D,Ward D-24,Dr. Wilson,2.2,Discharged,1,0,1,80,112,75,96,97.2,Uninsured
+P0424,Betty Smith,Male,50,2024-09-22,04:56,2024-09-27,Orthopedics,Ward A,Ward A-21,Dr. Anderson,3.6,Discharged,5,0,1,87,125,67,95,99.9,Private
+P0381,Donald Harris,Male,6,2024-06-22,14:43,2024-06-28,Pediatrics,Pediatric,Pediatric-17,Dr. Johnson,4.0,Discharged,6,0,1,71,101,77,98,97.8,Private
+P0610,Linda Lopez,Male,85,2024-04-02,05:47,2024-04-03,Neurology,ICU,ICU-14,Dr. Martinez,4.4,Discharged,1,0,0,85,116,77,97,98.2,Corporate
+P0677,Sharon Brown,Male,70,2024-07-12,10:56,2024-07-27,Emergency,Ward A,Ward A-4,Dr. Williams,4.0,Discharged,15,1,1,65,114,97,91,99.9,Uninsured
+P0345,Steven Williams,Male,51,2024-11-16,02:13,2024-11-18,Cardiology,Ward A,Ward A-7,Dr. Miller,4.8,Discharged,2,0,0,89,101,86,100,99.1,Medicare
+P0110,Christopher Brown,Female,41,2024-03-28,19:29,2024-04-21,Emergency,Emergency,Emergency-28,Dr. Johnson,4.6,Discharged,24,0,1,89,111,71,98,98.2,Private
+P0278,William Anderson,Male,8,2024-01-18,09:01,2024-02-02,Pediatrics,Pediatric,Pediatric-25,Dr. Williams,4.3,Discharged,15,0,1,68,122,71,100,97.3,Medicare
+P0678,Patricia Martinez,Female,27,2024-12-12,01:35,,Surgery,Ward B,Ward B-15,Dr. Miller,4.6,Recovering,228,0,0,55,130,92,100,97.6,Corporate
+P0571,Robert Thomas,Male,56,2024-11-05,21:20,,Cardiology,Surgery Wing,Surgery Wing-49,Dr. Hernandez,4.3,Under Observation,265,0,0,80,116,91,99,97.0,Corporate
+P0359,Steven Jones,Female,44,2024-10-16,18:42,2024-10-18,Cardiology,Ward C,Ward C-3,Dr. Garcia,3.5,Discharged,2,0,0,61,140,82,98,97.7,Medicare
+P0599,Ruth Lee,Male,33,2024-04-11,08:44,2024-04-14,Surgery,Pediatric,Pediatric-17,Dr. Martinez,3.5,Discharged,3,1,0,73,133,86,96,96.0,Medicare
+P0391,Paul White,Female,57,2024-05-08,17:54,2024-05-15,General Medicine,ICU,ICU-14,Dr. Smith,4.4,Discharged,7,0,0,73,116,73,95,99.5,Medicaid
+P0894,Sandra Perez,Male,19,2024-11-15,17:42,,Oncology,ICU,ICU-30,Dr. Smith,4.3,Recovering,255,0,0,73,147,100,98,99.5,Private
+P0693,Sharon Lee,Male,18,2024-04-13,14:55,,Neurology,Ward D,Ward D-11,Dr. Martinez,3.8,Critical,471,0,0,40,151,57,95,98.8,Medicaid
+P0728,Donald Anderson,Female,86,2024-03-20,15:01,2024-03-24,Oncology,Surgery Wing,Surgery Wing-20,Dr. Thomas,3.9,Discharged,4,0,1,56,120,81,100,98.9,Corporate
+P0363,Steven Lee,Female,69,2024-04-05,05:23,2024-04-08,Neurology,Ward C,Ward C-22,Dr. Miller,3.9,Discharged,3,0,0,71,115,90,96,97.0,Private
+P0597,Jessica Taylor,Male,17,2024-10-31,21:26,2024-11-04,Pediatrics,Pediatric,Pediatric-9,Dr. Lopez,5.0,Discharged,4,0,0,71,124,78,98,98.5,Medicaid
+P0428,Kenneth Robinson,Male,90,2024-06-05,16:02,2024-06-06,ICU,Ward A,Ward A-33,Dr. Garcia,4.7,Discharged,1,1,0,112,139,79,91,97.6,Medicare
+P0071,Karen Moore,Male,61,2024-02-17,07:53,2024-02-26,Oncology,Surgery Wing,Surgery Wing-10,Dr. Anderson,4.3,Discharged,9,0,1,58,109,100,95,97.8,Uninsured
+P0322,Joshua White,Male,55,2024-08-09,21:46,,Pediatrics,Ward B,Ward B-36,Dr. Williams,4.4,Stable,353,0,0,77,128,85,97,98.5,Corporate
+P0653,David Harris,Male,49,2024-08-18,21:28,,Oncology,Pediatric,Pediatric-27,Dr. Martinez,3.2,Stable,344,1,0,87,160,81,100,102.3,Uninsured
+P1066,Donald Jones,Male,42,2024-03-18,04:37,,Pediatrics,Surgery Wing,Surgery Wing-37,Dr. Garcia,5.0,Critical,497,0,0,64,120,50,88,101.9,Corporate
+P0108,Christopher Hernandez,Male,28,2024-08-08,05:08,2024-08-22,Emergency,Pediatric,Pediatric-36,Dr. Rodriguez,4.5,Discharged,14,0,1,71,130,68,98,98.7,Medicaid
+P1109,Patricia Hernandez,Female,37,2024-04-17,17:49,2024-05-06,Orthopedics,Ward C,Ward C-23,Dr. Wilson,4.8,Discharged,19,0,0,91,115,96,100,99.1,Medicare
+P0356,David Lewis,Male,41,2024-02-08,00:54,2024-02-09,Orthopedics,Ward B,Ward B-50,Dr. Miller,4.1,Discharged,1,1,0,80,99,72,92,98.8,Corporate
+P0951,David Ramirez,Male,29,2024-12-19,05:04,,ICU,Ward A,Ward A-28,Dr. Thomas,4.0,Under Observation,221,1,0,126,143,54,96,96.0,Medicaid
+P0343,Linda Perez,Female,51,2024-11-24,19:58,2024-11-25,General Medicine,Ward D,Ward D-25,Dr. Garcia,3.9,Discharged,1,0,0,53,101,91,99,98.4,Private
+P0355,Lisa Jones,Female,44,2024-08-16,11:49,2024-08-29,General Medicine,Pediatric,Pediatric-6,Dr. Martinez,3.8,Discharged,13,0,1,77,117,75,98,98.8,Medicaid
+P0024,Sandra Hernandez,Male,46,2024-11-14,18:06,,Emergency,Pediatric,Pediatric-23,Dr. Williams,4.6,Critical,256,0,1,100,112,63,95,98.9,Private
+P0044,Mary Ramirez,Female,44,2024-06-29,09:48,2024-07-04,General Medicine,Ward A,Ward A-48,Dr. Rodriguez,3.9,Discharged,5,0,0,83,117,71,97,98.9,Corporate
+P0244,Christopher Lee,Female,49,2024-02-12,20:34,2024-02-27,ICU,Surgery Wing,Surgery Wing-20,Dr. Johnson,3.5,Discharged,15,1,1,114,137,78,95,96.8,Private

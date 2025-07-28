@@ -1,0 +1,433 @@
+/*
+=========================================================================
+HEALTHCARE MONITORING DASHBOARD - DAX FORMULAS COLLECTION
+=========================================================================
+Power BI Project: Healthcare Monitoring System
+Author: Praneesh S
+Institution: SNS College of Engineering  
+Internship: Infotact Solution - Data Analytics Intern
+Version: 1.0
+Last Updated: July 2025
+
+This file contains all DAX measures and calculated columns used in the
+Healthcare Monitoring Dashboard. Copy and paste these formulas into 
+Power BI Desktop under "New Measure" in the Modeling tab.
+
+Total Measures: 69
+Categories: Basic KPIs, Patient Analytics, Doctor Performance, 
+           Ward Management, Emergency Metrics, Vitals Monitoring
+=========================================================================
+*/
+
+/* ===== BASIC KPI MEASURES ===== */
+
+Total_Patients = 
+COUNTROWS('Healthcare Data')
+
+Currently_Admitted = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[DischargeDate] = BLANK()
+)
+
+Total_Discharged = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[DischargeDate] <> BLANK()
+)
+
+Bed_Occupancy_Rate = 
+DIVIDE([Currently_Admitted], [Total_Patients], 0) * 100
+
+Discharge_Rate = 
+DIVIDE([Total_Discharged], [Total_Patients], 0) * 100
+
+/* ===== ICU & EMERGENCY METRICS ===== */
+
+ICU_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[ICUFlag] = 1
+)
+
+ICU_Utilization_Rate = 
+DIVIDE([ICU_Patients], [Total_Patients], 0) * 100
+
+Currently_in_ICU = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[ICUFlag] = 1,
+    'Healthcare Data'[DischargeDate] = BLANK()
+)
+
+Emergency_Cases = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[EmergencyFlag] = 1
+)
+
+Emergency_Rate = 
+DIVIDE([Emergency_Cases], [Total_Patients], 0) * 100
+
+Critical_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[TreatmentStatus] = "Critical"
+)
+
+/* ===== TREATMENT & LENGTH OF STAY ===== */
+
+Avg_Treatment_Days = 
+AVERAGE('Healthcare Data'[TreatmentDays])
+
+Max_Treatment_Days = 
+MAX('Healthcare Data'[TreatmentDays])
+
+Min_Treatment_Days = 
+MIN('Healthcare Data'[TreatmentDays])
+
+Median_Treatment_Days = 
+MEDIAN('Healthcare Data'[TreatmentDays])
+
+Total_Treatment_Days = 
+SUM('Healthcare Data'[TreatmentDays])
+
+Long_Stay_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[TreatmentDays] > 30
+)
+
+Short_Stay_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[TreatmentDays] <= 7
+)
+
+/* ===== VITALS MONITORING ===== */
+
+Avg_Heart_Rate = 
+AVERAGE('Healthcare Data'[HeartRate])
+
+Avg_Systolic_BP = 
+AVERAGE('Healthcare Data'[SystolicBP])
+
+Avg_Diastolic_BP = 
+AVERAGE('Healthcare Data'[DiastolicBP])
+
+Avg_SpO2 = 
+AVERAGE('Healthcare Data'[SpO2])
+
+Avg_Temperature = 
+AVERAGE('Healthcare Data'[Temperature])
+
+High_BP_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[SystolicBP] > 140 || 'Healthcare Data'[DiastolicBP] > 90
+)
+
+Low_SpO2_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[SpO2] < 95
+)
+
+High_Heart_Rate_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[HeartRate] > 100
+)
+
+Fever_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Temperature] > 100.4
+)
+
+/* ===== DOCTOR PERFORMANCE METRICS ===== */
+
+Total_Doctors = 
+DISTINCTCOUNT('Healthcare Data'[DoctorAssigned])
+
+Avg_Doctor_Rating = 
+AVERAGE('Healthcare Data'[DoctorRating])
+
+Patients_Per_Doctor = 
+DIVIDE([Total_Patients], [Total_Doctors], 0)
+
+Top_Rated_Doctor_Score = 
+MAXX(
+    VALUES('Healthcare Data'[DoctorAssigned]),
+    CALCULATE(AVERAGE('Healthcare Data'[DoctorRating]))
+)
+
+/* ===== DEPARTMENT ANALYTICS ===== */
+
+Total_Departments = 
+DISTINCTCOUNT('Healthcare Data'[Department])
+
+Largest_Department = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Department] = 
+    TOPN(1, VALUES('Healthcare Data'[Department]), 
+         CALCULATE(COUNTROWS('Healthcare Data')), DESC)
+)
+
+Pediatric_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Department] = "Pediatrics"
+)
+
+Surgery_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Department] = "Surgery"
+)
+
+/* ===== WARD MANAGEMENT ===== */
+
+Total_Wards = 
+DISTINCTCOUNT('Healthcare Data'[Ward])
+
+Ward_Occupancy = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[DischargeDate] = BLANK()
+)
+
+Most_Occupied_Ward = 
+MAXX(
+    VALUES('Healthcare Data'[Ward]),
+    CALCULATE([Currently_Admitted])
+)
+
+/* ===== TIME-BASED ANALYTICS ===== */
+
+This_Month_Admissions = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    MONTH('Healthcare Data'[AdmissionDate]) = MONTH(TODAY()),
+    YEAR('Healthcare Data'[AdmissionDate]) = YEAR(TODAY())
+)
+
+Last_Month_Admissions = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    MONTH('Healthcare Data'[AdmissionDate]) = MONTH(TODAY()) - 1,
+    YEAR('Healthcare Data'[AdmissionDate]) = YEAR(TODAY())
+)
+
+Monthly_Admissions = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    DATESMTD('Healthcare Data'[AdmissionDate])
+)
+
+Previous_Month_Admissions = 
+CALCULATE(
+    [Monthly_Admissions],
+    DATEADD('Healthcare Data'[AdmissionDate], -1, MONTH)
+)
+
+Admission_Growth_Rate = 
+DIVIDE(
+    [Monthly_Admissions] - [Previous_Month_Admissions],
+    [Previous_Month_Admissions], 0
+) * 100
+
+/* ===== DEMOGRAPHIC ANALYTICS ===== */
+
+Male_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Gender] = "Male"
+)
+
+Female_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Gender] = "Female"
+)
+
+Male_Percentage = 
+DIVIDE([Male_Patients], [Total_Patients], 0) * 100
+
+Female_Percentage = 
+DIVIDE([Female_Patients], [Total_Patients], 0) * 100
+
+Avg_Patient_Age = 
+AVERAGE('Healthcare Data'[Age])
+
+Elderly_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Age] >= 65
+)
+
+Adult_Patients = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Age] >= 18 && 'Healthcare Data'[Age] < 65
+)
+
+Pediatric_Count = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    'Healthcare Data'[Age] < 18
+)
+
+/* ===== CONDITIONAL FORMATTING & ALERTS ===== */
+
+Status_Color = 
+SWITCH(
+    TRUE(),
+    [Bed_Occupancy_Rate] > 90, "Red",
+    [Bed_Occupancy_Rate] > 75, "Orange",
+    "Green"
+)
+
+ICU_Alert = 
+IF([ICU_Utilization_Rate] > 80, "🚨 HIGH", 
+   IF([ICU_Utilization_Rate] > 60, "⚠️ MODERATE", "✅ NORMAL"))
+
+Emergency_Alert = 
+IF([Emergency_Rate] > 40, "🚨 CRITICAL", 
+   IF([Emergency_Rate] > 25, "⚠️ HIGH", "✅ NORMAL"))
+
+Vitals_Alert = 
+IF([High_BP_Patients] > [Total_Patients] * 0.3, "⚠️ High BP Alert", "✅ Normal")
+
+/* ===== COMPARATIVE ANALYTICS ===== */
+
+Best_Performing_Doctor = 
+CALCULATE(
+    MAX('Healthcare Data'[DoctorAssigned]),
+    TOPN(1, VALUES('Healthcare Data'[DoctorAssigned]), 
+         [Avg_Doctor_Rating], DESC)
+)
+
+Most_Efficient_Department = 
+CALCULATE(
+    MAX('Healthcare Data'[Department]),
+    TOPN(1, VALUES('Healthcare Data'[Department]), 
+         [Avg_Treatment_Days], ASC)
+)
+
+Busiest_Department = 
+CALCULATE(
+    MAX('Healthcare Data'[Department]),
+    TOPN(1, VALUES('Healthcare Data'[Department]), 
+         CALCULATE(COUNTROWS('Healthcare Data')), DESC)
+)
+
+/* ===== CALCULATED COLUMNS ===== */
+/* Note: These should be added as calculated columns, not measures */
+
+/*
+Age_Group = 
+SWITCH(
+    TRUE(),
+    'Healthcare Data'[Age] < 18, "Pediatric (0-17)",
+    'Healthcare Data'[Age] < 65, "Adult (18-64)",
+    "Elderly (65+)"
+)
+
+BP_Category = 
+SWITCH(
+    TRUE(),
+    'Healthcare Data'[SystolicBP] < 120 && 'Healthcare Data'[DiastolicBP] < 80, "Normal",
+    'Healthcare Data'[SystolicBP] < 130 && 'Healthcare Data'[DiastolicBP] < 80, "Elevated",
+    'Healthcare Data'[SystolicBP] < 140 || 'Healthcare Data'[DiastolicBP] < 90, "High BP Stage 1",
+    "High BP Stage 2"
+)
+
+Heart_Rate_Category = 
+SWITCH(
+    TRUE(),
+    'Healthcare Data'[HeartRate] < 60, "Bradycardia",
+    'Healthcare Data'[HeartRate] <= 100, "Normal",
+    "Tachycardia"
+)
+
+LOS_Category = 
+SWITCH(
+    TRUE(),
+    'Healthcare Data'[TreatmentDays] <= 3, "Short Stay",
+    'Healthcare Data'[TreatmentDays] <= 7, "Medium Stay",
+    'Healthcare Data'[TreatmentDays] <= 30, "Long Stay",
+    "Extended Stay"
+)
+*/
+
+/* ===== SPECIALIZED MEASURES ===== */
+
+Weekend_Admissions = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    WEEKDAY('Healthcare Data'[AdmissionDate], 2) >= 6
+)
+
+Weekday_Admissions = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    WEEKDAY('Healthcare Data'[AdmissionDate], 2) < 6
+)
+
+Night_Admissions = 
+CALCULATE(
+    COUNTROWS('Healthcare Data'),
+    HOUR(TIMEVALUE('Healthcare Data'[AdmissionTime])) >= 18 || 
+    HOUR(TIMEVALUE('Healthcare Data'[AdmissionTime])) < 6
+)
+
+Readmission_Rate = 
+/* This would require additional data to track readmissions */
+0
+
+Mortality_Rate = 
+/* This would require additional data to track outcomes */
+0
+
+/* ===== FINANCIAL METRICS (Placeholder) ===== */
+
+Avg_Cost_Per_Patient = 
+/* Placeholder - would require cost data */
+0
+
+Revenue_Per_Department = 
+/* Placeholder - would require revenue data */
+0
+
+/*
+=========================================================================
+IMPLEMENTATION NOTES:
+=========================================================================
+
+1. Copy each measure individually into Power BI Desktop
+2. Go to "Modeling" tab → "New Measure"  
+3. Paste the DAX formula and press Enter
+4. Repeat for all measures
+
+5. For calculated columns, go to "Modeling" tab → "New Column"
+6. Uncomment the calculated column formulas and add them
+
+7. Some measures are placeholders and would require additional data:
+   - Readmission_Rate: Needs patient history tracking
+   - Mortality_Rate: Needs outcome data  
+   - Financial metrics: Needs cost/revenue data
+
+8. Ensure your table name matches 'Healthcare Data' or update accordingly
+
+9. For conditional formatting:
+   - Select visual → Format → Conditional formatting
+   - Use measures like Status_Color, ICU_Alert, etc.
+
+10. Test all measures after implementation and verify calculations
+
+=========================================================================
+END OF DAX FORMULAS
+=========================================================================
+*/
